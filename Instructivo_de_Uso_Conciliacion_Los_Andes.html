@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Instructivo de uso Conciliación Los Andes</title>
+  <style>
+    :root{--navy:#11213d;--blue:#396eb7;--canvas:#f4f7fb;--text:#172b4d;--muted:#5c6f89;--line:#d9e3ef;--gold:#eaa516;--green:#16816a;--red:#b94352}*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--text);font:16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.top{padding:34px max(24px,calc((100% - 1060px)/2));background:var(--navy);color:#fff;border-bottom:4px solid var(--gold)}.top p{margin:0;color:#c7d5e8;font-size:15px}.top h1{font-size:34px;line-height:1.12;margin:8px 0}.top a{display:inline-block;margin-top:17px;padding:9px 12px;border:1px solid #6683aa;border-radius:8px;color:#fff;text-decoration:none;font-weight:700;font-size:14px}.wrap{max-width:1060px;margin:auto;padding:36px 24px 70px}.intro{font-size:18px;max-width:800px;margin:0 0 26px}.notice{padding:17px 19px;border-left:4px solid var(--gold);background:#fff8e7;border-radius:0 10px 10px 0;color:#5b470e}.notice strong{display:block;margin-bottom:4px}.steps{display:grid;gap:18px;margin-top:28px}.step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:23px 24px;box-shadow:0 8px 20px rgba(24,48,86,.05)}.step h2{margin:0 0 9px;font-size:21px}.number{display:inline-grid;place-items:center;width:29px;height:29px;margin-right:8px;border-radius:8px;background:#e6effb;color:#2c64a9;font-size:14px}.step p{margin:8px 0}.step ul{margin:10px 0 0;padding-left:22px}.step li{margin:5px 0}.example{margin-top:15px;padding:14px 16px;background:#f5f8fc;border:1px solid #e0e8f2;border-radius:9px;color:#425a79;font-size:14px}.example b{color:var(--text)}.files{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}.file{padding:14px;border-radius:10px;background:#f7faff;border:1px solid #d9e6f5}.file b{display:block}.file small{color:var(--muted)}.result{margin-top:18px;overflow:auto}.result table{width:100%;border-collapse:collapse;background:#fff}.result th,.result td{padding:11px 12px;text-align:left;border:1px solid var(--line);font-size:14px}.result th{background:#1d416e;color:#fff}.ok{color:var(--green);font-weight:800}.warn{color:#875d00;font-weight:800}.bad{color:var(--red);font-weight:800}.foot{margin-top:35px;color:var(--muted);font-size:14px}@media(max-width:700px){.top h1{font-size:29px}.files{grid-template-columns:1fr}.wrap{padding:28px 17px 55px}.step{padding:19px}.result table{min-width:590px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <p>Distribuidora Los Andes</p>
+    <h1>Instructivo de uso de la conciliación de pagos</h1>
+    <p>Dirigido a la Coordinación de Contraloría Interna y a las funciones autorizadas de revisión.</p>
+    <a href="Aplicacion_Conciliacion_Los_Andes.html">Abrir la aplicación</a>
+  </header>
+  <main class="wrap">
+    <p class="intro">Esta aplicación cruza pagos bancarios con órdenes de pago y facturas pendientes. Solo marca un pago como conciliado cuando existe una referencia bancaria, una orden asociada y un monto exacto.</p>
+    <section class="notice"><strong>Antes de comenzar</strong>Trabaje con los tres archivos de la misma semana. No modifique los encabezados exigidos; la aplicación procesa los archivos localmente y no sustituye los documentos originales.</section>
+    <section class="steps">
+      <article class="step">
+        <h2><span class="number">1</span>Preparar los tres archivos</h2>
+        <div class="files">
+          <div class="file"><b>Extracto bancario</b><small>Archivo CSV del banco.</small><br><small>Columnas: Fecha, Referencia, Descripcion, Monto_Debito.</small></div>
+          <div class="file"><b>Facturas pendientes</b><small>Archivo Excel en formato XLSX.</small><br><small>Columnas: Nro_Factura, Monto_Esperado.</small></div>
+          <div class="file"><b>Órdenes de pago</b><small>Archivo CSV del sistema de pagos.</small><br><small>Columnas: Id_Bancario_Unico, Nro_Factura, Monto_Aplicado.</small></div>
+        </div>
+        <div class="example"><b>Regla clave:</b> el valor de <code>Referencia</code> en el extracto debe ser igual a <code>Id_Bancario_Unico</code> en la orden. No se usan coincidencias aproximadas por proveedor, RIF o descripción.</div>
+      </article>
+      <article class="step">
+        <h2><span class="number">2</span>Cargar los archivos</h2>
+        <p>En la pantalla principal seleccione un archivo en cada una de las tres tarjetas: Extracto bancario, Facturas pendientes y Órdenes de pago. Al estar los tres cargados, se habilita el botón <b>Procesar conciliación</b>.</p>
+        <ul><li>Para una demostración rápida, pulse <b>Probar el caso de ejemplo</b>. La aplicación carga y procesa un caso de tres pagos automáticamente.</li><li>Si un archivo no cumple el formato, se mostrará un aviso indicando el encabezado faltante o el dato inválido.</li></ul>
+      </article>
+      <article class="step">
+        <h2><span class="number">3</span>Leer las alertas y el resultado</h2>
+        <p>La aplicación presenta alertas antes y después del proceso. Las alertas iniciales indican que faltan fuentes; las alertas posteriores indican cuántas excepciones requieren investigación.</p>
+        <div class="result"><table><thead><tr><th>Resultado</th><th>Significado</th><th>Acción de la función responsable</th></tr></thead><tbody><tr><td class="ok">CONCILIADO</td><td>Referencia, orden y monto coinciden.</td><td>Conservar el resultado para el cierre semanal.</td></tr><tr><td class="warn">DIFERENCIA DE MONTO</td><td>El pago bancario y la orden tienen importes distintos.</td><td>Revisar retención, comisión o soporte de pago; no marcar como pagado sin respaldo.</td></tr><tr><td class="bad">PAGO NO IDENTIFICADO</td><td>Existe un débito sin orden de pago asociada.</td><td>Solicitar identificación al área de pagos o al banco.</td></tr><tr><td class="bad">PAGO DUPLICADO</td><td>La misma referencia figura más de una vez.</td><td>Confirmar si es un duplicado bancario, una reversa o un pago repetido.</td></tr></tbody></table></div>
+      </article>
+      <article class="step">
+        <h2><span class="number">4</span>Resolver excepciones y descargar el resumen</h2>
+        <p>Revise primero la tabla <b>Excepciones abiertas</b>. Cada registro muestra la referencia, la factura vinculada, la diferencia y el motivo. Use <b>Marcar revisada</b> únicamente después de revisar el soporte correspondiente.</p>
+        <p>Pulse <b>Descargar resumen</b> para generar un archivo de texto con los pagos procesados, los conciliados y las excepciones aún abiertas. El resumen sirve como apoyo para el reporte de cierre; los documentos fuente siguen siendo los respaldos oficiales.</p>
+      </article>
+    </section>
+    <p class="foot">Controles de visualización: use “Modo claro” o “Modo oscuro” y el control de tamaño de letra en la esquina superior derecha. Los ajustes se conservan en el navegador utilizado.</p>
+  </main>
+</body>
+</html>
